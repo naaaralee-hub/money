@@ -23,10 +23,13 @@ const setupEventListeners = () => {
     // 폼 제출
     document.getElementById('expenseForm').addEventListener('submit', handleAddExpense);
 
-    // 탭 전환
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.addEventListener('click', handleTabChange);
+    // 사이드바 네비게이션 링크
+    document.querySelectorAll('[data-tab-link]').forEach(link => {
+        link.addEventListener('click', handleSidebarNavClick);
     });
+
+    // 메뉴 토글 (모바일)
+    document.getElementById('menuToggle').addEventListener('click', handleMenuToggle);
 
     // 필터링
     document.getElementById('monthFilter').addEventListener('change', handleMonthFilter);
@@ -42,6 +45,41 @@ const setupEventListeners = () => {
         document.getElementById('restoreFile').click();
     });
     document.getElementById('restoreFile').addEventListener('change', handleRestore);
+};
+
+// 사이드바 메뉴 토글
+const handleMenuToggle = () => {
+    const sidebar = document.querySelector('.sidebar');
+    sidebar.classList.toggle('open');
+};
+
+// 사이드바 네비게이션 클릭
+const handleSidebarNavClick = (e) => {
+    e.preventDefault();
+    const tabName = e.currentTarget.dataset.tabLink;
+
+    // 모든 네비게이션 링크에서 active 제거
+    document.querySelectorAll('[data-tab-link]').forEach(link => link.classList.remove('active'));
+    
+    // 클릭한 링크에 active 추가
+    e.currentTarget.classList.add('active');
+
+    // 탭 콘텐츠 표시
+    document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+    document.getElementById(`${tabName}-tab`).classList.add('active');
+
+    // 모바일에서 사이드바 닫기
+    const sidebar = document.querySelector('.sidebar');
+    if (window.innerWidth <= 768) {
+        sidebar.classList.remove('open');
+    }
+
+    // 탭별 렌더링
+    if (tabName === 'analytics') {
+        setTimeout(() => {
+            renderAnalytics();
+        }, 100);
+    }
 };
 
 // 비용 추가
