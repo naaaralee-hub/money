@@ -87,11 +87,13 @@
             </div>
         </section>
 
-        <!-- 입력 탭 -->
+        <!-- ========== 입력 탭 ========== -->
         <section class="tab-content active" id="input-tab">
+            <!-- 비용 입력 폼 -->
             <div class="form-section">
                 <h2>비용 추가</h2>
                 <form id="expenseForm">
+                    <!-- 분류 선택 -->
                     <div class="form-group">
                         <label for="category">분류</label>
                         <select id="category" required>
@@ -105,66 +107,78 @@
                             <option value="기타">기타</option>
                         </select>
                     </div>
+                    <!-- 금액 입력 -->
                     <div class="form-group">
                         <label for="amount">금액</label>
                         <input type="number" id="amount" placeholder="0" min="0" step="100" required>
                     </div>
+                    <!-- 날짜 선택 -->
                     <div class="form-group">
                         <label for="date">날짜</label>
                         <input type="date" id="date" required>
                     </div>
+                    <!-- 입주자 입력 -->
                     <div class="form-group">
                         <label for="resident">입주자</label>
                         <input type="text" id="resident" placeholder="예: 101호" required>
                     </div>
+                    <!-- 메모 입력 -->
                     <div class="form-group">
                         <label for="note">메모</label>
                         <textarea id="note" placeholder="선택사항"></textarea>
                     </div>
+                    <!-- 비용 추가 버튼 -->
                     <button type="submit" class="btn btn-primary">추가하기</button>
                 </form>
             </div>
 
-            <!-- 이번 달 비용 요약 -->
+            <!-- 카테고리별 비용 분석 -->
             <div class="summary-section">
                 <h2>이번 달 비용 분석</h2>
+                <!-- 카테고리별 비용 아이템 -->
                 <div id="categoryBreadown" class="category-breakdown">
                     <!-- 카테고리별 비용이 동적으로 추가됨 -->
                 </div>
             </div>
         </section>
 
-        <!-- 이력 탭 -->
+        <!-- ========== 이력 탭 ========== -->
         <section class="tab-content" id="history-tab">
             <div class="history-section">
                 <h2>결제 이력</h2>
+                <!-- 월 필터 및 삭제 버튼 -->
                 <div class="filters">
                     <input type="month" id="monthFilter" class="month-filter">
                     <button class="btn btn-secondary" id="clearHistoryBtn">모두 삭제</button>
                 </div>
+                <!-- 이력 목록 -->
                 <div id="historyList" class="history-list">
                     <!-- 이력이 동적으로 추가됨 -->
                 </div>
             </div>
         </section>
 
-        <!-- 통계 탭 -->
+        <!-- ========== 통계 탭 ========== -->
         <section class="tab-content" id="analytics-tab">
             <div class="analytics-section">
                 <h2>비용 통계</h2>
 
-                <!-- 전년도 대비 섹션 -->
+                <!-- 전년도 동월 비교 섹션 -->
                 <div class="yoy-comparison-section">
                     <h3>📊 전년도 동월 대비 분석</h3>
+                    <!-- 연도별 비용 카드 -->
                     <div class="yoy-summary">
+                        <!-- 올해 비용 -->
                         <div class="yoy-card">
                             <div class="yoy-label">올해 <span id="yoyCurrentMonth"></span>월</div>
                             <div class="yoy-value" id="yoyCurrentTotal">₩0</div>
                         </div>
+                        <!-- 지난해 비용 -->
                         <div class="yoy-card">
                             <div class="yoy-label">지난해 <span id="yoyLastYearMonth"></span>월</div>
                             <div class="yoy-value" id="yoyLastYearTotal">₩0</div>
                         </div>
+                        <!-- 증감량 -->
                         <div class="yoy-card comparison">
                             <div class="yoy-label">증감량</div>
                             <div class="yoy-value" id="yoyDifference">₩0</div>
@@ -172,6 +186,7 @@
                         </div>
                     </div>
 
+                    <!-- 카테고리별 전년도 비교 테이블 -->
                     <div class="yoy-category-breakdown">
                         <h4>카테고리별 전년도 대비</h4>
                         <table class="yoy-table">
@@ -191,17 +206,21 @@
                     </div>
                 </div>
 
+                <!-- 차트 컨테이너 -->
                 <div class="charts-container">
+                    <!-- 카테고리별 차트 -->
                     <div class="chart-card">
                         <h3>카테고리별 비용</h3>
                         <canvas id="categoryChart"></canvas>
                     </div>
+                    <!-- 월별 추이 차트 -->
                     <div class="chart-card">
                         <h3>월별 추이</h3>
                         <canvas id="trendsChart"></canvas>
                     </div>
                 </div>
 
+                <!-- 월별 요약 테이블 -->
                 <div class="summary-table">
                     <h3>월별 요약</h3>
                     <table id="summaryTable">
@@ -225,26 +244,31 @@
             </div>
         </section>
 
-        <!-- 내보내기 탭 -->
+        <!-- ========== 내보내기 탭 ========== -->
         <section class="tab-content" id="export-tab">
             <div class="export-section">
                 <h2>데이터 내보내기</h2>
+                <!-- 내보내기 옵션 카드 -->
                 <div class="export-options">
+                    <!-- Excel 내보내기 -->
                     <div class="export-card">
                         <h3>📊 Excel 내보내기</h3>
                         <p>현재 데이터를 Excel 파일로 내보냅니다</p>
                         <button class="btn btn-primary" id="exportExcelBtn">Excel로 내보내기</button>
                     </div>
+                    <!-- CSV 내보내기 -->
                     <div class="export-card">
                         <h3>📋 CSV 내보내기</h3>
                         <p>현재 데이터를 CSV 파일로 내보냅니다</p>
                         <button class="btn btn-primary" id="exportCsvBtn">CSV로 내보내기</button>
                     </div>
+                    <!-- JSON 백업 -->
                     <div class="export-card">
                         <h3>💾 JSON 백업</h3>
                         <p>전체 데이터를 JSON 형식으로 백업합니다</p>
                         <button class="btn btn-primary" id="backupBtn">백업하기</button>
                     </div>
+                    <!-- 데이터 복구 -->
                     <div class="export-card">
                         <h3>📂 데이터 복구</h3>
                         <p>백업된 JSON 파일에서 데이터를 복구합니다</p>
@@ -259,6 +283,7 @@
         <section class="reminder-section">
             <div class="reminders-container">
                 <h2>🔔 예정된 알림</h2>
+                <!-- 리마인더 카드 목록 -->
                 <div id="reminders" class="reminders">
                     <!-- 리마인더가 동적으로 추가됨 -->
                 </div>
@@ -266,11 +291,14 @@
         </section>
     </main>
 
-    <!-- 모달 -->
+    <!-- ========== 모달 및 알림 ========== -->
+    
+    <!-- 확인 모달 -->
     <div id="confirmModal" class="modal">
         <div class="modal-content">
             <h3>확인</h3>
             <p id="confirmMessage"></p>
+            <!-- 모달 버튼 -->
             <div class="modal-buttons">
                 <button class="btn btn-secondary" id="cancelBtn">취소</button>
                 <button class="btn btn-danger" id="confirmBtn">확인</button>
@@ -278,12 +306,17 @@
         </div>
     </div>
 
-    <!-- 알림 토스트 -->
+    <!-- 토스트 알림 -->
     <div id="toast" class="toast"></div>
 
+    <!-- ========== 스크립트 ========== -->
+    <!-- Chart.js 라이브러리 -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <!-- 데이터 관리 모듈 -->
     <script src="js/data.js"></script>
+    <!-- 유틸리티 함수 -->
     <script src="js/utils.js"></script>
+    <!-- 메인 애플리케이션 로직 -->
     <script src="js/app.js"></script>
 </body>
 </html>
