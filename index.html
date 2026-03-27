@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공과금 관리 대시보드</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <h1>💰 공과금 관리 대시보드</h1>
+                <p class="subtitle">공동 관리비를 효율적으로 관리하세요</p>
+            </div>
+        </header>
+
+        <!-- 통계 섹션 -->
+        <section class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">이번 달 예상</div>
+                    <div class="stat-value" id="thisMonthTotal">₩0</div>
+                    <div class="stat-subtext">총 비용</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">이전 달</div>
+                    <div class="stat-value" id="lastMonthTotal">₩0</div>
+                    <div class="stat-subtext">지난달 비용</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">평균</div>
+                    <div class="stat-value" id="averageTotal">₩0</div>
+                    <div class="stat-subtext">6개월 평균</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">누계</div>
+                    <div class="stat-value" id="totalAll">₩0</div>
+                    <div class="stat-subtext">전체 비용</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 탭 네비게이션 -->
+        <nav class="tabs">
+            <button class="tab-btn active" data-tab="input">입력</button>
+            <button class="tab-btn" data-tab="history">이력</button>
+            <button class="tab-btn" data-tab="analytics">통계</button>
+            <button class="tab-btn" data-tab="export">내보내기</button>
+        </nav>
+
+        <!-- 입력 탭 -->
+        <section class="tab-content active" id="input-tab">
+            <div class="form-section">
+                <h2>비용 추가</h2>
+                <form id="expenseForm">
+                    <div class="form-group">
+                        <label for="category">분류</label>
+                        <select id="category" required>
+                            <option value="">선택하세요</option>
+                            <option value="전기료">전기료</option>
+                            <option value="수도료">수도료</option>
+                            <option value="가스료">가스료</option>
+                            <option value="인터넷">인터넷</option>
+                            <option value="관리비">관리비</option>
+                            <option value="보험료">보험료</option>
+                            <option value="기타">기타</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="amount">금액</label>
+                        <input type="number" id="amount" placeholder="0" min="0" step="100" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="date">날짜</label>
+                        <input type="date" id="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="resident">입주자</label>
+                        <input type="text" id="resident" placeholder="예: 101호" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="note">메모</label>
+                        <textarea id="note" placeholder="선택사항"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">추가하기</button>
+                </form>
+            </div>
+
+            <!-- 이번 달 비용 요약 -->
+            <div class="summary-section">
+                <h2>이번 달 비용 분석</h2>
+                <div id="categoryBreadown" class="category-breakdown">
+                    <!-- 카테고리별 비용이 동적으로 추가됨 -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 이력 탭 -->
+        <section class="tab-content" id="history-tab">
+            <div class="history-section">
+                <h2>결제 이력</h2>
+                <div class="filters">
+                    <input type="month" id="monthFilter" class="month-filter">
+                    <button class="btn btn-secondary" id="clearHistoryBtn">모두 삭제</button>
+                </div>
+                <div id="historyList" class="history-list">
+                    <!-- 이력이 동적으로 추가됨 -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 통계 탭 -->
+        <section class="tab-content" id="analytics-tab">
+            <div class="analytics-section">
+                <h2>비용 통계</h2>
+
+                <!-- 전년도 대비 섹션 -->
+                <div class="yoy-comparison-section">
+                    <h3>📊 전년도 동월 대비 분석</h3>
+                    <div class="yoy-summary">
+                        <div class="yoy-card">
+                            <div class="yoy-label">올해 <span id="yoyCurrentMonth"></span>월</div>
+                            <div class="yoy-value" id="yoyCurrentTotal">₩0</div>
+                        </div>
+                        <div class="yoy-card">
+                            <div class="yoy-label">지난해 <span id="yoyLastYearMonth"></span>월</div>
+                            <div class="yoy-value" id="yoyLastYearTotal">₩0</div>
+                        </div>
+                        <div class="yoy-card comparison">
+                            <div class="yoy-label">증감량</div>
+                            <div class="yoy-value" id="yoyDifference">₩0</div>
+                            <div class="yoy-percentage" id="yoyPercentage">0%</div>
+                        </div>
+                    </div>
+
+                    <div class="yoy-category-breakdown">
+                        <h4>카테고리별 전년도 대비</h4>
+                        <table class="yoy-table">
+                            <thead>
+                                <tr>
+                                    <th>분류</th>
+                                    <th>올해</th>
+                                    <th>지난해</th>
+                                    <th>증감량</th>
+                                    <th>증감률</th>
+                                </tr>
+                            </thead>
+                            <tbody id="yoyCategoryTableBody">
+                                <!-- 데이터가 동적으로 추가됨 -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="charts-container">
+                    <div class="chart-card">
+                        <h3>카테고리별 비용</h3>
+                        <canvas id="categoryChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h3>월별 추이</h3>
+                        <canvas id="trendsChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="summary-table">
+                    <h3>월별 요약</h3>
+                    <table id="summaryTable">
+                        <thead>
+                            <tr>
+                                <th>월</th>
+                                <th>전기료</th>
+                                <th>수도료</th>
+                                <th>가스료</th>
+                                <th>인터넷</th>
+                                <th>관리비</th>
+                                <th>기타</th>
+                                <th>합계</th>
+                            </tr>
+                        </thead>
+                        <tbody id="summaryTableBody">
+                            <!-- 데이터가 동적으로 추가됨 -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 내보내기 탭 -->
+        <section class="tab-content" id="export-tab">
+            <div class="export-section">
+                <h2>데이터 내보내기</h2>
+                <div class="export-options">
+                    <div class="export-card">
+                        <h3>📊 Excel 내보내기</h3>
+                        <p>현재 데이터를 Excel 파일로 내보냅니다</p>
+                        <button class="btn btn-primary" id="exportExcelBtn">Excel로 내보내기</button>
+                    </div>
+                    <div class="export-card">
+                        <h3>📋 CSV 내보내기</h3>
+                        <p>현재 데이터를 CSV 파일로 내보냅니다</p>
+                        <button class="btn btn-primary" id="exportCsvBtn">CSV로 내보내기</button>
+                    </div>
+                    <div class="export-card">
+                        <h3>💾 JSON 백업</h3>
+                        <p>전체 데이터를 JSON 형식으로 백업합니다</p>
+                        <button class="btn btn-primary" id="backupBtn">백업하기</button>
+                    </div>
+                    <div class="export-card">
+                        <h3>📂 데이터 복구</h3>
+                        <p>백업된 JSON 파일에서 데이터를 복구합니다</p>
+                        <button class="btn btn-secondary" id="restoreBtn">복구하기</button>
+                        <input type="file" id="restoreFile" accept=".json" style="display: none;">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 리마인더 섹션 -->
+        <section class="reminder-section">
+            <div class="reminders-container">
+                <h2>🔔 예정된 알림</h2>
+                <div id="reminders" class="reminders">
+                    <!-- 리마인더가 동적으로 추가됨 -->
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- 모달 -->
+    <div id="confirmModal" class="modal">
+        <div class="modal-content">
+            <h3>확인</h3>
+            <p id="confirmMessage"></p>
+            <div class="modal-buttons">
+                <button class="btn btn-secondary" id="cancelBtn">취소</button>
+                <button class="btn btn-danger" id="confirmBtn">확인</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 알림 토스트 -->
+    <div id="toast" class="toast"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

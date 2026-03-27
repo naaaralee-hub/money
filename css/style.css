@@ -1,0 +1,866 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #333;
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* 헤더 */
+.header {
+    background: white;
+    padding: 30px 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.header h1 {
+    color: #667eea;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: #666;
+    font-size: 1.1em;
+}
+
+/* 통계 섹션 */
+.stats-section {
+    margin-bottom: 30px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.stat-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border-left: 4px solid #667eea;
+    transition: transform 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+.stat-label {
+    font-size: 0.9em;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.stat-value {
+    font-size: 2em;
+    font-weight: bold;
+    color: #667eea;
+    margin-bottom: 5px;
+}
+
+.stat-subtext {
+    font-size: 0.85em;
+    color: #666;
+}
+
+/* 탭 네비게이션 */
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    flex-wrap: wrap;
+}
+
+.tab-btn {
+    padding: 12px 20px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 1em;
+    color: #666;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.tab-btn:hover {
+    background: #f0f0f0;
+}
+
+.tab-btn.active {
+    background: #667eea;
+    color: white;
+}
+
+/* 탭 콘텐츠 */
+.tab-content {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* 폼 섹션 */
+.form-section {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.form-section h2 {
+    color: #667eea;
+    margin-bottom: 20px;
+}
+
+/*폼 그룹 */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+    font-family: inherit;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 5px rgba(102, 126, 234, 0.3);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* 버튼 */
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.btn-primary {
+    background: #667eea;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #5568d3;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.btn-secondary {
+    background: #e0e0e0;
+    color: #333;
+}
+
+.btn-secondary:hover {
+    background: #d0d0d0;
+}
+
+.btn-danger {
+    background: #ff6b6b;
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #ff5252;
+}
+
+/* 요약 섹션 */
+.summary-section {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.summary-section h2 {
+    color: #667eea;
+    margin-bottom: 20px;
+}
+
+.category-breakdown {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.breakdown-item {
+    background: #f5f5f5;
+    padding: 15px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.breakdown-category {
+    font-weight: 500;
+    color: #333;
+}
+
+.breakdown-amount {
+    color: #667eea;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+/* 이력 섹션 */
+.history-section {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.history-section h2 {
+    color: #667eea;
+    margin-bottom: 20px;
+}
+
+.filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.month-filter {
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.history-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr auto;
+    gap: 15px;
+    padding: 15px;
+    background: #f9f9f9;
+    border-left: 4px solid #667eea;
+    border-radius: 5px;
+    align-items: center;
+}
+
+.history-item-detail {
+    display: flex;
+    flex-direction: column;
+}
+
+.history-date {
+    color: #999;
+    font-size: 0.9em;
+}
+
+.history-category {
+    font-weight: 600;
+    color: #333;
+}
+
+.history-amount {
+    font-weight: bold;
+    color: #667eea;
+    font-size: 1.1em;
+}
+
+.history-resident {
+    color: #666;
+}
+
+.delete-btn {
+    background: #ff6b6b;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.delete-btn:hover {
+    background: #ff5252;
+}
+
+/* 통계 섹션 */
+.analytics-section {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.analytics-section h2 {
+    color: #667eea;
+    margin-bottom: 30px;
+}
+
+/* 전년도 대비 섹션 */
+.yoy-comparison-section {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 25px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    border-left: 5px solid #667eea;
+}
+
+.yoy-comparison-section h3 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 1.2em;
+}
+
+.yoy-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.yoy-card {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    border-top: 3px solid #667eea;
+    transition: transform 0.3s ease;
+}
+
+.yoy-card:hover {
+    transform: translateY(-3px);
+}
+
+.yoy-card.comparison {
+    border-top: 3px solid #764ba2;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.yoy-card.comparison .yoy-label {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.yoy-card.comparison .yoy-value {
+    color: #fff;
+}
+
+.yoy-card.comparison .yoy-percentage {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.yoy-label {
+    font-size: 0.9em;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.yoy-label span {
+    font-weight: bold;
+    color: #667eea;
+}
+
+.yoy-card.comparison .yoy-label span {
+    color: #fff;
+}
+
+.yoy-value {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #667eea;
+    margin-bottom: 5px;
+}
+
+.yoy-percentage {
+    font-size: 1em;
+    color: #999;
+    font-weight: 600;
+}
+
+.yoy-percentage.positive {
+    color: #4caf50;
+}
+
+.yoy-percentage.negative {
+    color: #ff6b6b;
+}
+
+/* 카테고리별 전년도 대비 테이블 */
+.yoy-category-breakdown {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.yoy-category-breakdown h4 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 1.05em;
+}
+
+.yoy-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95em;
+}
+
+.yoy-table thead {
+    background: #f0f2f5;
+    border-bottom: 2px solid #667eea;
+}
+
+.yoy-table th {
+    padding: 12px;
+    text-align: right;
+    color: #333;
+    font-weight: 600;
+}
+
+.yoy-table th:first-child {
+    text-align: left;
+}
+
+.yoy-table td {
+    padding: 12px;
+    text-align: right;
+    border-bottom: 1px solid #eee;
+    color: #666;
+}
+
+.yoy-table td:first-child {
+    text-align: left;
+    font-weight: 500;
+    color: #333;
+}
+
+.yoy-table tbody tr:hover {
+    background: #f9f9f9;
+}
+
+.yoy-amount {
+    font-weight: 600;
+    color: #667eea;
+}
+
+.yoy-change {
+    font-weight: 600;
+}
+
+.yoy-change.positive {
+    color: #4caf50;
+}
+
+.yoy-change.positive::before {
+    content: "↑ ";
+}
+
+.yoy-change.negative {
+    color: #ff6b6b;
+}
+
+.yoy-change.negative::before {
+    content: "↓ ";
+}
+
+
+.charts-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.chart-card {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.chart-card h3 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.summary-table {
+    margin-top: 30px;
+}
+
+.summary-table h3 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table thead {
+    background: #667eea;
+    color: white;
+}
+
+table th,
+table td {
+    padding: 12px;
+    text-align: right;
+    border-bottom: 1px solid #eee;
+}
+
+table th:first-child,
+table td:first-child {
+    text-align: left;
+}
+
+table tbody tr:hover {
+    background: #f5f5f5;
+}
+
+/* 내보내기 섹션 */
+.export-section {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.export-section h2 {
+    color: #667eea;
+    margin-bottom: 30px;
+}
+
+.export-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.export-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 25px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.export-card h3 {
+    margin-bottom: 10px;
+}
+
+.export-card p {
+    font-size: 0.95em;
+    margin-bottom: 20px;
+    opacity: 0.9;
+}
+
+.export-card .btn {
+    background: white;
+    color: #667eea;
+    font-weight: 600;
+}
+
+.export-card .btn:hover {
+    background: #f0f0f0;
+}
+
+.export-card .btn-secondary {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid white;
+}
+
+.export-card .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* 리마인더 섹션 */
+.reminder-section {
+    margin-top: 30px;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.reminders-container h2 {
+    color: #667eea;
+    margin-bottom: 20px;
+}
+
+.reminders {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+.reminder-card {
+    background: linear-gradient(135deg, #fff5e1 0%, #ffe0b2 100%);
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid #ffa726;
+}
+
+.reminder-title {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.reminder-date {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.empty-reminder {
+    text-align: center;
+    color: #999;
+    padding: 20px;
+}
+
+/* 모달 */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content h3 {
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.modal-content p {
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.modal-buttons button {
+    flex: 1;
+}
+
+/* 토스트 알림 */
+.toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #333;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 5px;
+    display: none;
+    animation: slideIn 0.3s ease;
+    z-index: 2000;
+}
+
+.toast.show {
+    display: block;
+}
+
+.toast.success {
+    background: #4caf50;
+}
+
+.toast.error {
+    background: #ff6b6b;
+}
+
+.toast.warning {
+    background: #ffa726;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(400px);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 1.8em;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .tabs {
+        flex-direction: column;
+    }
+
+    .tab-btn {
+        width: 100%;
+        text-align: left;
+    }
+
+    .form-section,
+    .summary-section,
+    .history-section,
+    .analytics-section,
+    .export-section,
+    .reminder-section {
+        padding: 20px;
+    }
+
+    .history-item {
+        grid-template-columns: 1fr;
+    }
+
+    table {
+        font-size: 0.85em;
+    }
+
+    table th,
+    table td {
+        padding: 8px;
+    }
+
+    .charts-container {
+        grid-template-columns: 1fr;
+    }
+
+    .toast {
+        right: 10px;
+        left: 10px;
+        bottom: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 10px;
+    }
+
+    .header {
+        padding: 20px 15px;
+    }
+
+    .header h1 {
+        font-size: 1.5em;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .stat-card {
+        padding: 15px;
+    }
+
+    .form-section,
+    .summary-section,
+    .history-section,
+    .analytics-section,
+    .export-section,
+    .reminder-section {
+        padding: 15px;
+    }
+
+    .export-options {
+        grid-template-columns: 1fr;
+    }
+
+    .reminders {
+        grid-template-columns: 1fr;
+    }
+}
